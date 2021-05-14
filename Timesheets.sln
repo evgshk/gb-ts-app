@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Timesheets", "Timesheets\Timesheets.csproj", "{B926B4A1-D2C9-4646-A8A4-D835CBA519EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B926B4A1-D2C9-4646-A8A4-D835CBA519EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B926B4A1-D2C9-4646-A8A4-D835CBA519EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B926B4A1-D2C9-4646-A8A4-D835CBA519EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B926B4A1-D2C9-4646-A8A4-D835CBA519EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
