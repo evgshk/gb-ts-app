@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Timesheets.Data.Interfaces;
 using Timesheets.Domain.Interfaces;
 using Timesheets.Models;
@@ -15,12 +17,17 @@ namespace Timesheets.Domain.Implementation
             _sheetRepo = sheetRepo;
         }
 
-        public Sheet GetItem(Guid id)
+        public async Task<Sheet> GetItem(Guid id)
         {
-            return _sheetRepo.GetItem(id);
+            return await _sheetRepo.GetItem(id);
         }
 
-        public Guid Create(SheetCreateRequest sheetRequest)
+        public async Task<IEnumerable<Sheet>> GetItems()
+        {
+            return await _sheetRepo.GetItems();
+        }
+
+        public async Task<Guid> Create(SheetRequest sheetRequest)
         {
             var sheet = new Sheet()
             {
@@ -32,9 +39,24 @@ namespace Timesheets.Domain.Implementation
                 ServiceId = sheetRequest.ServiceId
             };
             
-            _sheetRepo.Add(sheet);
+            await _sheetRepo.Add(sheet);
             
             return sheet.Id;
+        }
+
+        public async Task Update(Guid id, SheetRequest sheetRequest)
+        {
+            var sheet = new Sheet
+            {
+                Id = id,
+                Amount = sheetRequest.Amount,
+                ContractId = sheetRequest.ContractId,
+                Date = sheetRequest.Date,
+                EmployeeId = sheetRequest.EmployeeId,
+                ServiceId = sheetRequest.ServiceId
+            };
+            
+            await _sheetRepo.Update(sheet);
         }
     }
 }

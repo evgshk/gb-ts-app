@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Timesheets.Data
 {
     public interface IRepoBase<T>
     {
-        T GetItem(Guid id);
-        IEnumerable<T> GetItems();
-        void Add(T item);
-        void Update();
+        Task<T> GetItem(Guid id);
+        Task<IEnumerable<T>> GetItems();
+        Task Add(T item);
+        Task Update(T item);
     }
 }
