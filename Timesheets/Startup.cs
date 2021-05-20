@@ -17,6 +17,7 @@ using Timesheets.Data.Implementation;
 using Timesheets.Data.Interfaces;
 using Timesheets.Domain.Implementation;
 using Timesheets.Domain.Interfaces;
+using Timesheets.Infrastructure;
 
 namespace Timesheets
 {
@@ -32,9 +33,10 @@ namespace Timesheets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TimesheetDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //UsePostgres
+            // services.AddDbContext<TimesheetDbContext>(options =>
+            //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.ConfigureDbContext(Configuration);
             
             services.AddScoped<ISheetRepo, SheetRepo>();
             services.AddScoped<IContractManager, ContractManager>();
