@@ -18,6 +18,7 @@ namespace Timesheets.Data
             // db-first
             // model-first
         }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
