@@ -27,13 +27,8 @@ namespace Timesheets.Data.Implementation
         public async Task<IEnumerable<Sheet>> GetItems()
         {
             var result =  await _context.Sheets.ToListAsync();
-            var filteredResult = result.Where(x => x.Amount > 2);
-
-
-            var result2 = _context.Sheets.AsQueryable();
-            filteredResult = result2.Where(x => x.Amount > 2);
-
-            return filteredResult.AsEnumerable();
+            
+            return result;
         }
 
         public async Task Add(Sheet item)

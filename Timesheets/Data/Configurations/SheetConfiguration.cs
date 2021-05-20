@@ -13,7 +13,12 @@ namespace Timesheets.Data.Configurations
             builder.Property(x => x.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("Id");
-            
+
+            builder
+                .HasOne(sheet => sheet.Invoice)
+                .WithMany(invoice => invoice.Sheets)
+                .HasForeignKey("InvoiceId");
+
             builder
                 .HasOne(sheet => sheet.Contract)
                 .WithMany(contract => contract.Sheets)
