@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Timesheets.Data.Configurations;
+using Timesheets.Data.Ef.Configurations;
 using Timesheets.Models;
 
-namespace Timesheets.Data
+namespace Timesheets.Data.Ef
 {
     public class TimesheetDbContext: DbContext
     {

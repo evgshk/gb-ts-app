@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Timesheets.Models;
 
-namespace Timesheets.Data.Configurations
+namespace Timesheets.Data.Ef.Configurations
 {
     public class SheetConfiguration: IEntityTypeConfiguration<Sheet>
     {
