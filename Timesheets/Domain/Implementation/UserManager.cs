@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Timesheets.Data.Interfaces;
 using Timesheets.Domain.Interfaces;
+using Timesheets.Infrastructure.Extensions;
 using Timesheets.Models;
 using Timesheets.Models.Dto;
 
@@ -29,6 +30,8 @@ namespace Timesheets.Domain.Implementation
 
         public async Task<Guid> CreateUser(CreateUserRequest request)
         {
+            request.EnsureNotNull(nameof(request));
+            
             var user = new User
             {
                 Id = Guid.NewGuid(),
