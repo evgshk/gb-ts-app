@@ -9,38 +9,38 @@ using Timesheets.Models;
 
 namespace Timesheets.Data.Implementation
 {
-    public class EmployeeRepo : IEmployeeRepo
+    public class UserRepo : IUserRepo
     {
         private readonly TimesheetDbContext _context;
 
-        public EmployeeRepo(TimesheetDbContext context)
+        public UserRepo(TimesheetDbContext context)
         {
             _context = context;
         }
 
-        public async Task Add(Employee item)
+        public async Task Add(User item)
         {
-            await _context.Employees.AddAsync(item);
+            await _context.Users.AddAsync(item);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Employee> GetItem(Guid id)
+        public async Task<User> GetItem(Guid id)
         {
             return
-                await _context.Employees
+                await _context.Users
                     .Where(x => x.Id == id)
                     .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Employee>> GetItems()
+        public async Task<IEnumerable<User>> GetItems()
         {
             return
-                await _context.Employees.ToListAsync();
+                await _context.Users.ToListAsync();
         }
 
-        public async Task Update(Employee item)
+        public async Task Update(User item)
         {
-            _context.Employees.Update(item);
+            _context.Users.Update(item);
             await _context.SaveChangesAsync();
         }
     }

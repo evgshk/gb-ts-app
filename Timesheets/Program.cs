@@ -7,6 +7,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
+/// <summary>
+/// https://github.com/evgshk/gb-ts-app 
+/// </summary>
 namespace Timesheets
 {
     public class Program

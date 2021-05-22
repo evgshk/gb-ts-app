@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Timesheets.Data;
+using Timesheets.Data.Ef;
 using Timesheets.Data.Implementation;
 using Timesheets.Data.Interfaces;
 using Timesheets.Domain.Implementation;
@@ -33,9 +34,12 @@ namespace Timesheets
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TimesheetDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //UsePostgres
-            
+            {
+                options.UseNpgsql(
+                    Configuration.GetConnectionString("Postgres"),
+                    b => b.MigrationsAssembly("Timesheets"));
+            });
+
             services.AddScoped<ISheetRepo, SheetRepo>();
             services.AddScoped<IContractManager, ContractManager>();
             services.AddScoped<ISheetManager, SheetManager>();

@@ -21,9 +21,9 @@ namespace Timesheets.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get([FromQuery] Guid id)
+        public async Task<IActionResult> Get([FromQuery] Guid id)
         {
-            var result = _sheetManager.GetItem(id);
+            var result = await _sheetManager.GetItem(id);
             
             return Ok(result);
         }
@@ -35,7 +35,7 @@ namespace Timesheets.Controllers
             return Ok(result);
         }
 
-        /// <summary> Возвращает запись табеля </summary>
+        /// <summary> Создает запись табеля </summary>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SheetRequest sheet)
         {

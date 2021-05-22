@@ -1,7 +1,61 @@
-﻿namespace Timesheets.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+using Timesheets.Domain.Interfaces;
+using Timesheets.Models.Dto;
+
+namespace Timesheets.Controllers
 {
-    public class EmployeesController
+    [ApiController]
+    [Route("[controller]")]
+    public class EmployeesController : ControllerBase
     {
-        
+        private readonly IEmployeeManager _EmployeeManager;
+
+        public EmployeesController(IEmployeeManager EmployeeManager)
+        {
+            _EmployeeManager = EmployeeManager;
+        }
+
+        /// <summary> Создает Employee, возвращает id /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] EmployeeRequest Employee)
+        {
+            var id = await _EmployeeManager.Create(Employee);
+            return Ok(id);
+        }
+
+        /// <summary> Возвращает Employee по id /// </summary>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetItem([FromQuery] Guid id)
+        {
+            var result = await _EmployeeManager.GetItem(id);
+            return Ok(result);
+        }
+
+        /// <summary> Возвращает Employee по id /// </summary>
+        [HttpGet]
+        public async Task<IActionResult> GetItems()
+        {
+            var result = await _EmployeeManager.GetItems();
+            return Ok(result);
+        }
+
+        /// <summary> Изменяет Employee с заданным id /// </summary>
+        [HttpPut("{id}")]
+        public async Task Update([FromRoute] Guid id, [FromBody] EmployeeRequest EmployeeRequest)
+        {
+            await _EmployeeManager.Update(id, EmployeeRequest);
+            return;
+        }
+
+        /// <summary> Удаляет Employee с заданным id /// </summary>
+        [HttpDelete("{id}")]
+        public async Task Delete([FromRoute] Guid id)
+        {
+            await _EmployeeManager.Delete(id);
+            return;
+        }
+
     }
 }
