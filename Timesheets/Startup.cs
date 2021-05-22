@@ -18,6 +18,7 @@ using Timesheets.Data.Implementation;
 using Timesheets.Data.Interfaces;
 using Timesheets.Domain.Implementation;
 using Timesheets.Domain.Interfaces;
+using Timesheets.Infrastructure.Extensions;
 
 namespace Timesheets
 {
@@ -33,17 +34,9 @@ namespace Timesheets
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TimesheetDbContext>(options =>
-            {
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("Postgres"),
-                    b => b.MigrationsAssembly("Timesheets"));
-            });
-
-            services.AddScoped<ISheetRepo, SheetRepo>();
-            services.AddScoped<IContractManager, ContractManager>();
-            services.AddScoped<ISheetManager, SheetManager>();
-            services.AddScoped<IContractRepo, ContractRepo>();
+            services.ConfigureDbContext(Configuration);
+            services.ConfigureRepositories();
+            services.ConfigureDomainManagers();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -4,6 +4,11 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <PropertyGroup>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+      <NoWarn>$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.6">
@@ -16,12 +21,12 @@
         </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.6" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-    </ItemGroup>
+      </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Data\Ef\Cofigurations\" />
-      <Folder Include="Infrastructure" />
-      <Folder Include="Migrations\" />
-    </ItemGroup>
+      <ItemGroup>
+        <Folder Include="Data\Ef\Cofigurations\" />
+        <Folder Include="Infrastructure" />
+        <Folder Include="Migrations\" />
+      </ItemGroup>
 
 </Project>
