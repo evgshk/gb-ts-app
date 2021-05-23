@@ -17,7 +17,8 @@ namespace Timesheets.Controllers
             _EmployeeManager = EmployeeManager;
         }
 
-        /// <summary> Создает работника, возвращает id </summary>
+        /// <summary> Создает работника </summary>
+        /// <returns> id работника </returns>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] EmployeeRequest Employee)
         {
@@ -25,7 +26,8 @@ namespace Timesheets.Controllers
             return Ok(id);
         }
 
-        /// <summary> Возвращает данные работника по id </summary>
+        /// <summary> Получает данные работника по id </summary>
+        /// <returns> Данные работника </returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetItem([FromRoute] Guid id)
         {
@@ -33,7 +35,8 @@ namespace Timesheets.Controllers
             return Ok(result);
         }
 
-        /// <summary> Возвращает список данных работников </summary>
+        /// <summary> Получает список данных работников </summary>
+        /// <returns> Список данных работников </returns>
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
