@@ -17,7 +17,10 @@ namespace Timesheets.Controllers
             _userManager = userManager;
         }
 
-        /// <summary> Создает пользователя, возвращает id /// </summary>
+        /// <summary>
+        /// Создает пользователя 
+        /// </summary>
+        /// <returns> id созданного объекта </returns>
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] UserRequest user)
         {
@@ -25,7 +28,7 @@ namespace Timesheets.Controllers
             return Ok(id);
         }
 
-        /// <summary> Возвращает пользователя по id /// </summary>
+        /// <summary> Возвращает пользователя по id </summary>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetItem([FromRoute] Guid id)
         {
@@ -33,7 +36,7 @@ namespace Timesheets.Controllers
             return Ok(result);
         }
 
-        /// <summary> Возвращает список пользователей /// </summary>
+        /// <summary> Возвращает список пользователей </summary>
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
@@ -41,7 +44,7 @@ namespace Timesheets.Controllers
             return Ok(result);
         }
 
-        /// <summary> Изменяет User с заданным id /// </summary>
+        /// <summary> Изменяет User с заданным id </summary>
         [HttpPut("{id}")]
         public async Task Update([FromRoute] Guid id, [FromBody] UserRequest userRequest)
         {

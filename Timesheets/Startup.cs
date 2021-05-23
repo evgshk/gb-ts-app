@@ -37,12 +37,9 @@ namespace Timesheets
             services.ConfigureDbContext(Configuration);
             services.ConfigureRepositories();
             services.ConfigureDomainManagers();
+            services.ConfigureBackendSwagger();
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Timesheets", Version = "v1"});
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
