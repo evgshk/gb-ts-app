@@ -18,6 +18,14 @@ namespace Timesheets.Data.Implementation
             _context = context;
         }
 
+        public async Task<User> GetByLoginAndPasswordHash(string login, byte[] passwordHash)
+        {
+            return
+                await _context.Users
+                    .Where(x => x.Username == login && x.PasswordHash == passwordHash)
+                    .FirstOrDefaultAsync();
+        }
+
         public async Task Add(User item)
         {
             await _context.Users.AddAsync(item);

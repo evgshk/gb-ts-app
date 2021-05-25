@@ -15,6 +15,11 @@ namespace Timesheets.Data.Ef.Configurations
                 .HasColumnName("Id");
 
             builder
+                .HasOne(sheet => sheet.Invoice)
+                .WithMany(invoice => invoice.Sheets)
+                .HasForeignKey("InvoiceId");
+
+            builder
                 .HasOne(sheet => sheet.Contract)
                 .WithMany(contract => contract.Sheets)
                 .HasForeignKey("ContractId");

@@ -35,6 +35,7 @@ namespace Timesheets
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureDbContext(Configuration);
+            services.ConfigureAuthentication(Configuration);
             services.ConfigureRepositories();
             services.ConfigureDomainManagers();
             services.ConfigureBackendSwagger();

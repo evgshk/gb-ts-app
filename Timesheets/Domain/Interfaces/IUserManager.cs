@@ -10,6 +10,8 @@ namespace Timesheets.Domain.Interfaces
 {
     public interface IUserManager
     {
+        /// <summary> Возвращает пользователя по логину и паролю </summary>
+        Task<User> GetUser(LoginRequest request);
         Task<User> GetItem(Guid id);
         Task<IEnumerable<User>> GetItems();
         Task<Guid> Create(UserRequest userRequest);

@@ -5,7 +5,8 @@ using Timesheets.Models.Dto;
 
 namespace Timesheets.Data.Interfaces
 {
-    public interface IUserRepo: IRepoBase<User>
+    public interface IUserRepo : IRepoBase<User>
     {
+        Task<User> GetByLoginAndPasswordHash(string login, byte[] passwordHash);
     }
 }
