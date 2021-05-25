@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +10,8 @@ using Timesheets.Data.Implementation;
 using Timesheets.Data.Interfaces;
 using Timesheets.Domain.Implementation;
 using Timesheets.Domain.Interfaces;
+using Timesheets.Infrastructure.Validation;
+using Timesheets.Models.Dto;
 using Timesheets.Models.Dto.Authentication;
 
 namespace Timesheets.Infrastructure.Extensions
@@ -54,6 +57,7 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<IContractManager, ContractManager>();
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<ILoginManager, LoginManager>();
+            services.AddScoped<IInvoiceManager, InvoiceManager>();
         }
 
         public static void ConfigureRepositories(this IServiceCollection services)
@@ -61,6 +65,7 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<ISheetRepo, SheetRepo>();
             services.AddScoped<IContractRepo, ContractRepo>();
             services.AddScoped<IUserRepo, UserRepo>();
+            services.AddScoped<IInvoiceRepo, InvoiceRepo>();
         }
         
         public static void ConfigureBackendSwagger(this IServiceCollection services)
@@ -86,6 +91,11 @@ namespace Timesheets.Infrastructure.Extensions
                     }
                 });
             });
+        }
+
+        public static void ConfigureValidation(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<SheetRequest>, SheetRequestValidator>();
         }
     }
 }
