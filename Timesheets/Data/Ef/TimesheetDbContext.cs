@@ -12,6 +12,7 @@ namespace Timesheets.Data.Ef
         public DbSet<Service> Services { get; set; }
         public DbSet<Sheet> Sheets { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
         public TimesheetDbContext(DbContextOptions<TimesheetDbContext> options):base(options)
         {
