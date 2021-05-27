@@ -19,7 +19,7 @@ namespace Timesheets.Controllers
             _userManager = userManager;
         }
 
-        /// <summary> Авторизация пользователя. </summary>
+        /// <summary> Авторизация пользователя. Создаются AccessToken и RefreshToken, RefreshToken ссохраняется в базе</summary>
         /// <param name="request"></param>
         /// <returns> LoginResponse </returns>
         [HttpPost]
