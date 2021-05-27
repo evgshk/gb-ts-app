@@ -24,6 +24,11 @@ namespace Timesheets.Data.Implementation
             await _context.SaveChangesAsync();
         }
 
+        public void Delete(RefreshTokenWrapper item)
+        {
+            _context.Remove(item);
+        }
+
         public async Task<RefreshTokenWrapper> GetItem(string token)
         {
             return

@@ -64,9 +64,14 @@ namespace Timesheets.Domain.Implementation
             return loginResponse;
         }
 
-        public async Task<RefreshTokenWrapper> Refresh(RefreshRequest request)
+        public async Task<RefreshTokenWrapper> GetRefreshToken(RefreshRequest request)
         {
-            return await _refreshTokenRepo.GetItem(request.RefreshToken);
+            var token = await _refreshTokenRepo.GetItem(request.RefreshToken);
+            if (token != null)
+            {
+                _refreshTokenRepo.Delete(token);
+            }
+            return token;
         }
     }
 }

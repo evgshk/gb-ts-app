@@ -11,5 +11,6 @@ namespace Timesheets.Data.Interfaces
         Task Add(RefreshTokenWrapper item);
         Task<RefreshTokenWrapper> GetItem(string token);
         Task Update(RefreshTokenWrapper item);
+        void Delete(RefreshTokenWrapper item);
     }
 }
