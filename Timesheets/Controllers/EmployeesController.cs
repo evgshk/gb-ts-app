@@ -6,9 +6,7 @@ using Timesheets.Models.Dto;
 
 namespace Timesheets.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class EmployeesController : ControllerBase
+    public class EmployeesController : TimesheetsBaseController
     {
         private readonly IEmployeeManager _EmployeeManager;
 

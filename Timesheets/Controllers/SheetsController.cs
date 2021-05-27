@@ -9,9 +9,7 @@ using Timesheets.Models.Dto;
 namespace Timesheets.Controllers
 {
     [Authorize]
-    [ApiController]
-    [Route("[controller]")]
-    public class SheetsController: ControllerBase
+    public class SheetsController: TimesheetsBaseController
     {
         private readonly ISheetManager _sheetManager;
         private readonly IContractManager _contractManager;
