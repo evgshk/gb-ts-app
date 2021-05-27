@@ -31,9 +31,13 @@ namespace Timesheets.Infrastructure.Extensions
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JwtAccessOptions>(configuration.GetSection("Authentication:JwtAccessOptions"));
+            services.Configure<JwtRefreshOptions>(configuration.GetSection("Authentication:JwtRefreshOptions"));
 
             var jwtSettings = new JwtOptions();
             configuration.Bind("Authentication:JwtAccessOptions", jwtSettings);
+
+            var jwtRefteshSettings = new JwtOptions();
+            configuration.Bind("Authentication:JwtRefreshOptions", jwtRefteshSettings);
 
             services.AddTransient<ILoginManager, LoginManager>();
 
@@ -65,6 +69,7 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<IContractRepo, ContractRepo>();
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IEmployeeRepo, EmployeeRepo>();
+            services.AddScoped<IRefreshTokenWrapperRepo, RefreshTokenWrapperRepo>();
         }
 
         public static void ConfigureBackendSwagger(this IServiceCollection services)

@@ -26,7 +26,6 @@
       </ItemGroup>
 
       <ItemGroup>
-        <Folder Include="Data\Ef\Cofigurations\" />
         <Folder Include="Infrastructure" />
         <Folder Include="Migrations\" />
       </ItemGroup>

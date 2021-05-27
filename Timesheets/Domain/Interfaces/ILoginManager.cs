@@ -7,5 +7,6 @@ namespace Timesheets.Domain.Interfaces
     public interface ILoginManager
     {
         LoginResponse Authenticate(User user);
+        Task<RefreshTokenWrapper> Refresh(RefreshRequest request);
     }
 }

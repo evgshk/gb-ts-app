@@ -30,7 +30,7 @@ namespace Timesheets.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "user")]
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {
