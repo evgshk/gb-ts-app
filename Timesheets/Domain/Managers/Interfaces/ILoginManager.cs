@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Timesheets.Models;
 using Timesheets.Models.Dto;
+using Timesheets.Models.Entities;
 
-namespace Timesheets.Domain.Interfaces
+namespace Timesheets.Domain.Managers.Interfaces
 {
     public interface ILoginManager
     {

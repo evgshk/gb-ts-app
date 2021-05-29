@@ -16,8 +16,6 @@ using Microsoft.OpenApi.Models;
 using Timesheets.Data;
 using Timesheets.Data.Implementation;
 using Timesheets.Data.Interfaces;
-using Timesheets.Domain.Implementation;
-using Timesheets.Domain.Interfaces;
 using Timesheets.Infrastructure;
 using Timesheets.Infrastructure.Extensions;
 

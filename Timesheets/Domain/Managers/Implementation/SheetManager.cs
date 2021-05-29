@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Timesheets.Data.Interfaces;
-using Timesheets.Domain.Interfaces;
-using Timesheets.Models;
+using Timesheets.Domain.Aggregates.SheetAggregate;
+using Timesheets.Domain.Managers.Interfaces;
 using Timesheets.Models.Dto;
+using Timesheets.Models.Entities;
 
-namespace Timesheets.Domain.Implementation
+namespace Timesheets.Domain.Managers.Implementation
 {
     public class SheetManager: ISheetManager
     {
         private readonly ISheetRepo _sheetRepo;
+        private readonly ISheetAggregateRepo _sheetAggregateRepo;
 
         public SheetManager(ISheetRepo sheetRepo)
         {
@@ -29,33 +31,22 @@ namespace Timesheets.Domain.Implementation
 
         public async Task<Guid> Create(SheetRequest sheetRequest)
         {
-            var sheet = new Sheet()
-            {
-                Id = Guid.NewGuid(),
-                Amount = sheetRequest.Amount,
-                ContractId = sheetRequest.ContractId,
-                Date = sheetRequest.Date,
-                EmployeeId = sheetRequest.EmployeeId,
-                ServiceId = sheetRequest.ServiceId
-            };
-            
+            var sheet = SheetAggregate.CreateFromSheetRequest(sheetRequest);
+
             await _sheetRepo.Add(sheet);
-            
             return sheet.Id;
+        }
+
+        public async Task Approve(Guid sheetId)
+        {
+            var sheet = await _sheetAggregateRepo.GetItem(sheetId);
+            sheet.ApproveSheet();
+            await _sheetAggregateRepo.Update(sheet);
         }
 
         public async Task Update(Guid id, SheetRequest sheetRequest)
         {
-            var sheet = new Sheet
-            {
-                Id = id,
-                Amount = sheetRequest.Amount,
-                ContractId = sheetRequest.ContractId,
-                Date = sheetRequest.Date,
-                EmployeeId = sheetRequest.EmployeeId,
-                ServiceId = sheetRequest.ServiceId
-            };
-            
+            var sheet = SheetAggregate.CreateFromSheetRequest(sheetRequest);
             await _sheetRepo.Update(sheet);
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Timesheets.Models
+namespace Timesheets.Models.Entities
 {
     /// <summary> Информация о пользователе системы </summary>
     public class User

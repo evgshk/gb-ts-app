@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Timesheets.Data.Ef;
 using Timesheets.Data.Interfaces;
 using Timesheets.Models;
+using Timesheets.Models.Entities;
 
 namespace Timesheets.Data.Implementation
 {
