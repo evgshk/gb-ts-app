@@ -13,6 +13,6 @@ namespace Timesheets.Models
 
         public Contract Contract { get; set; }
 
-        public ICollection<Sheet> Sheets { get; set; }
+        public List<Sheet> Sheets { get; set; } = new List<Sheet>();
     }
 }

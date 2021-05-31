@@ -8,7 +8,7 @@ using Timesheets.Models.Dto;
 
 namespace Timesheets.Controllers
 {
-    [Authorize]
+//    [Authorize]
     public class SheetsController: TimesheetsBaseController
     {
         private readonly ISheetManager _sheetManager;
@@ -28,7 +28,7 @@ namespace Timesheets.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "user")]
+//        [Authorize(Roles = "user")]
         [HttpGet]
         public async Task<IActionResult> GetItems()
         {

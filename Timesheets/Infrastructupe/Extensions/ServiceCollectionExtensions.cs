@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +12,9 @@ using Timesheets.Data.Implementation;
 using Timesheets.Data.Interfaces;
 using Timesheets.Domain.Implementation;
 using Timesheets.Domain.Interfaces;
+using Timesheets.Infrastructupe.Validation;
+using Timesheets.Infrastructure.Validation;
+using Timesheets.Models.Dto;
 using Timesheets.Models.Dto.Authentication;
 
 namespace Timesheets.Infrastructure.Extensions
@@ -61,6 +65,7 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<IEmployeeManager, EmployeeManager>();
             services.AddScoped<ILoginManager, LoginManager>();
+            services.AddScoped<IInvoiceManager, InvoiceManager>();
         }
 
         public static void ConfigureRepositories(this IServiceCollection services)
@@ -70,6 +75,7 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             services.AddScoped<IRefreshTokenWrapperRepo, RefreshTokenWrapperRepo>();
+            services.AddScoped<IInvoiceRepo, InvoiceRepo>();
         }
 
         public static void ConfigureBackendSwagger(this IServiceCollection services)
@@ -120,5 +126,13 @@ namespace Timesheets.Infrastructure.Extensions
             });
         }
 
+        public static void ConfigureValidation(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<SheetRequest>, SheetRequestValidator>();
+            services.AddTransient<IValidator<InvoiceRequest>, InvoiceRequestValidator>();
+            services.AddTransient<IValidator<UserRequest>, UserRequestValidator>();
+            services.AddTransient<IValidator<EmployeeRequest>, EmployeeRequestValidator>();
+            services.AddTransient<IValidator<ClientRequest>, ClientRequestValidator>();
+        }
     }
 }
