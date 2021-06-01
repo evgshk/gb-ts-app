@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Timesheets.Domain.Interfaces;
+using Timesheets.Domain;
+using Timesheets.Domain.Managers.Interfaces;
+using Timesheets.Domain.ValueObjects;
 using Timesheets.Models.Dto;
 
 namespace Timesheets.Controllers
@@ -31,6 +33,15 @@ namespace Timesheets.Controllers
             var loginResponse = await _loginManager.Authenticate(user);
 
             return Ok(loginResponse);
+        }
+
+        public async Task<IActionResult> Refresh()
+        {
+            // return new (refresh, access);
+            
+            var rub100 = Money.FromDecimal(100);
+
+            return null;
         }
     }
 }

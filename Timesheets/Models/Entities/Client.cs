@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Timesheets.Models
+namespace Timesheets.Models.Entities
 {
     /// <summary> Информация о владельце контракта </summary>
     public class Client

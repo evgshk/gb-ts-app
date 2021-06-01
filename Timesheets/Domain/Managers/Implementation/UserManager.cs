@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Timesheets.Data.Interfaces;
-using Timesheets.Domain.Interfaces;
+using Timesheets.Domain.Managers.Interfaces;
 using Timesheets.Infrastructure.Extensions;
-using Timesheets.Models;
 using Timesheets.Models.Dto;
+using Timesheets.Models.Entities;
 
-namespace Timesheets.Domain.Implementation
+namespace Timesheets.Domain.Managers.Implementation
 {
     public class UserManager: IUserManager
     {
