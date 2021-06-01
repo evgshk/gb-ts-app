@@ -7,7 +7,7 @@ using Timesheets.Models.Dto;
 
 namespace Timesheets.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class SheetsController: TimesheetBaseController
@@ -20,7 +20,7 @@ namespace Timesheets.Controllers
             _sheetManager = sheetManager;
             _contractManager = contractManager;
         }
-
+        [Authorize(Roles = "user,admin")]
         [HttpGet("{id}")]
         public IActionResult Get([FromQuery] Guid id)
         {
@@ -38,6 +38,7 @@ namespace Timesheets.Controllers
         }
 
         /// <summary> Возвращает запись табеля </summary>
+        [Authorize(Roles = "user,admin")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] SheetRequest sheet)
         {
@@ -52,7 +53,8 @@ namespace Timesheets.Controllers
             return Ok(id);
         }
 
-        /// <summary> Обновляет запись табеля </summary>
+        /// <summary> Обновляет запись табеля </summary>    
+        [Authorize(Roles = "admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] SheetRequest sheet)
         {

@@ -6,6 +6,7 @@ using Timesheets.Models.Dto;
 
 namespace Timesheets.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("[controller]")]
     public class LoginController: ControllerBase
