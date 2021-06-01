@@ -13,5 +13,6 @@ namespace Timesheets.Domain.Interfaces
 
         /// <summary> Создает нового пользователя </summary>
         Task<Guid> CreateUser(CreateUserRequest request);
+        Task<User> SearchUserByGuid(Guid guid);
     }
 }

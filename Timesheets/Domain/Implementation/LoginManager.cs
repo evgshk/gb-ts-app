@@ -2,25 +2,23 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
 using Timesheets.Domain.Interfaces;
 using Timesheets.Infrastructure.Extensions;
 using Timesheets.Models;
 using Timesheets.Models.Dto;
-using Timesheets.Models.Dto.Authentication;
-using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace Timesheets.Domain.Implementation
 {
     public class LoginManager: ILoginManager
     {
-        private readonly JwtAccessOptions _jwtAccessOptions;
 
-        public LoginManager(IOptions<JwtAccessOptions> jwtAccessOptions)
+        private readonly ITokenManager _tokenManager;
+
+        public LoginManager(ITokenManager tokenManager)
         {
-            _jwtAccessOptions = jwtAccessOptions.Value;
+            _tokenManager = tokenManager;
         }
-        
+
         public async Task<LoginResponse> Authenticate(User user)
         {
             var claims = new List<Claim>
@@ -30,14 +28,14 @@ namespace Timesheets.Domain.Implementation
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
             };
 
-            var accessTokenRaw = _jwtAccessOptions.GenerateToken(claims);
-            var securityHandler = new JwtSecurityTokenHandler();
-            var accessToken = securityHandler.WriteToken(accessTokenRaw);
+            var accessToken = _tokenManager.CreateAccessToken(claims);
+            var refreshToken =  await _tokenManager.CreateRefreshToken(claims);
 
             var loginResponse = new LoginResponse()
             {
-                AccessToken = accessToken,
-                ExpiresIn = accessTokenRaw.ValidTo.ToEpochTime()
+                AccessToken = accessToken.Token,
+                RefreshToken = refreshToken,
+                AccessTokenExpiresIn = accessToken.Expires.ToEpochTime()
             };
 
             return loginResponse;
