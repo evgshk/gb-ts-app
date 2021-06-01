@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Timesheets.Data.Ef;
@@ -28,6 +29,12 @@ namespace Timesheets.Data.Implementation
         {
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+        }
+
+        public Task<User> SearchUserByGuid(Guid id)
+        {
+            var result = _context.Users.FirstOrDefaultAsync(user => user.Id == id);
+            return result;
         }
     }
 }

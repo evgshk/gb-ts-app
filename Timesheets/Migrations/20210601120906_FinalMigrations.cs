@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Timesheets.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class FinalMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,6 +50,19 @@ namespace Timesheets.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "refreshToken",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Token = table.Column<string>(type: "text", nullable: true),
+                    Expires = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_refreshToken", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "services",
                 columns: table => new
                 {
@@ -66,7 +79,9 @@ namespace Timesheets.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Username = table.Column<string>(type: "text", nullable: true)
+                    Username = table.Column<string>(type: "text", nullable: true),
+                    PasswordHash = table.Column<byte[]>(type: "bytea", nullable: true),
+                    Role = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,7 +118,7 @@ namespace Timesheets.Migrations
                     EmployeeId = table.Column<Guid>(type: "uuid", nullable: false),
                     ContractId = table.Column<Guid>(type: "uuid", nullable: false),
                     ServiceId = table.Column<Guid>(type: "uuid", nullable: false),
-                    InvoiceId = table.Column<Guid>(type: "uuid", nullable: false),
+                    InvoiceId = table.Column<Guid>(type: "uuid", nullable: true),
                     Amount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -126,7 +141,7 @@ namespace Timesheets.Migrations
                         column: x => x.InvoiceId,
                         principalTable: "invoices",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_sheets_services_ServiceId",
                         column: x => x.ServiceId,
@@ -165,6 +180,9 @@ namespace Timesheets.Migrations
         {
             migrationBuilder.DropTable(
                 name: "clients");
+
+            migrationBuilder.DropTable(
+                name: "refreshToken");
 
             migrationBuilder.DropTable(
                 name: "sheets");

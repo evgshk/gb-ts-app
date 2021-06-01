@@ -32,23 +32,24 @@ namespace Timesheets.Infrastructure.Extensions
         public static void ConfigureAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<JwtAccessOptions>(configuration.GetSection("Authentication:JwtAccessOptions"));
+            services.Configure<JwtRefreshOptions>(configuration.GetSection("Authentication:JwtRefreshOptions"));
 
             var jwtSettings = new JwtOptions();
             configuration.Bind("Authentication:JwtAccessOptions", jwtSettings);
 
+
             services.AddTransient<ILoginManager, LoginManager>();
 
-            services
-                .AddAuthentication(
+            services.AddAuthentication(
                     x =>
                     {
                         x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                         x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                     })
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = jwtSettings.GetTokenValidationParameters();
-                });
+                    .AddJwtBearer(options =>
+                    {
+                        options.TokenValidationParameters = jwtSettings.GetTokenValidationParameters();
+                    });
         }
 
         public static void ConfigureDomainManagers(this IServiceCollection services)
@@ -58,6 +59,7 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<IUserManager, UserManager>();
             services.AddScoped<ILoginManager, LoginManager>();
             services.AddScoped<IInvoiceManager, InvoiceManager>();
+            services.AddScoped<ITokenManager, TokenManager>();
         }
 
         public static void ConfigureRepositories(this IServiceCollection services)
@@ -66,13 +68,14 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<IContractRepo, ContractRepo>();
             services.AddScoped<IUserRepo, UserRepo>();
             services.AddScoped<IInvoiceRepo, InvoiceRepo>();
+            services.AddScoped<IRefreshTokenRepo, RefreshTokenRepo>();
         }
         
         public static void ConfigureBackendSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Timesheets", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Timesheets", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,

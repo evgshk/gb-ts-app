@@ -104,6 +104,23 @@ namespace Timesheets.Migrations
                     b.ToTable("invoices");
                 });
 
+            modelBuilder.Entity("Timesheets.Models.RefreshToken", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("Expires")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Token")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("refreshToken");
+                });
+
             modelBuilder.Entity("Timesheets.Models.Service", b =>
                 {
                     b.Property<Guid>("Id")

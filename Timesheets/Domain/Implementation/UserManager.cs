@@ -44,6 +44,11 @@ namespace Timesheets.Domain.Implementation
 
             return user.Id;
         }
+        public async Task<User> SearchUserByGuid(Guid guid)
+        {
+            var result = await _userRepo.SearchUserByGuid(guid);
+            return result;
+        }
 
         private static byte[] GetPasswordHash(string password)
         {
