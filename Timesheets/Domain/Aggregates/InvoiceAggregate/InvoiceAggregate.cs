@@ -8,8 +8,6 @@ namespace Timesheets.Domain.Aggregates.InvoiceAggregate
 {
     public class InvoiceAggregate : Invoice
     {
-        private readonly int _rate = 150;
-
         private InvoiceAggregate() { }
 
         public static InvoiceAggregate Create(Guid contractId, DateTime dateStart, DateTime dateEnd)
@@ -31,8 +29,13 @@ namespace Timesheets.Domain.Aggregates.InvoiceAggregate
 
         private void CalculateSum()
         {
-            var amount = Sheets.Sum(x => x.Amount * _rate);
-            Sum = Money.FromDecimal(amount);
+            //            var amount = Sheets.Sum(x => x.Amount * _rate); 
+            decimal sum = 0;
+            for (int i = 0; i < Sheets.Count(); i++)
+            {
+                sum += Sheets[i].Amount;
+            }
+            Sum = Money.FromDecimal(sum);
         }
     }
 }

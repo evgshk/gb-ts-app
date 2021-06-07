@@ -10,6 +10,8 @@ using Microsoft.OpenApi.Models;
 using Timesheets.Data.Ef;
 using Timesheets.Data.Implementation;
 using Timesheets.Data.Interfaces;
+using Timesheets.Domain.Aggregates.InvoiceAggregate;
+using Timesheets.Domain.Aggregates.SheetAggregate;
 using Timesheets.Domain.Implementation;
 using Timesheets.Domain.Interfaces;
 using Timesheets.Infrastructupe.Validation;
@@ -76,6 +78,8 @@ namespace Timesheets.Infrastructure.Extensions
             services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             services.AddScoped<IRefreshTokenWrapperRepo, RefreshTokenWrapperRepo>();
             services.AddScoped<IInvoiceRepo, InvoiceRepo>();
+            services.AddScoped<IInvoiceAggregateRepo, InvoiceAggregateRepo>();
+            services.AddScoped<ISheetAggregateRepo, SheetAggregateRepo>();
         }
 
         public static void ConfigureBackendSwagger(this IServiceCollection services)
