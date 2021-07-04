@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Timesheets.Domain.Interfaces
+namespace Timesheets.Domain.Managers.Interfaces
 {
     public interface IContractManager
     {
